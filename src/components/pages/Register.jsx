@@ -65,11 +65,6 @@ const Register = () => {
                     <Form.Control type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Enter your password" required />
                   </Form.Group>
       
-                  <Form.Group className="mb-3">
-                    <Form.Label className="text-start w-100">Confirm Password</Form.Label>
-                    <Form.Control type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} placeholder="Confirm your password" required />
-                  </Form.Group>
-      
                   <div className="d-grid gap-2">
                     <Button type="submit" size="lg" style={{ backgroundColor: '#CBAE81', borderColor: '#CBAE81' }} className="mb-3">
                       Sign Up
