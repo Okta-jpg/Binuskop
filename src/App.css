@@ -1,0 +1,26 @@
+.App {
+  text-align: center;
+  min-height: 100vh;
+  background-color: #1a1a1a;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.Movie-Search {
+  width: 100%;
+  max-width: 500px;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #272727;
+  color: white;
+  border: 1px solid #CBAE81;
+}
