@@ -7,7 +7,7 @@ import Home from './components/pages/Home';
 import Login from './components/pages/Login';
 import Register from './components/pages/Register';
 import Detailpage from './components/pages/Detailpage';
-
+import History from './components/pages/History';
 
 function App() {
 
@@ -21,6 +21,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path='/detail' element={<Detailpage/>}/>
+          <Route path='/history' element={<History/>}/>
         </Routes>
       </main>
     </div>
