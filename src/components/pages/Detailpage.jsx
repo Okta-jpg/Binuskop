@@ -1,7 +1,9 @@
 import { Container, Row, Col, Image, Button, Card } from 'react-bootstrap';
-
+import { useNavigate } from 'react-router-dom';
 
 const Detailpage = () => {
+
+  const navigate = useNavigate();
 
   const movie = {
     title: "Venom: The Last Dance",
@@ -13,6 +15,9 @@ const Detailpage = () => {
     synopsis: "Eddie and Venom are on the run. Hunted by both of their worlds and with the net closing in, the duo are forced into a devastating decision that will bring the curtains down on Venom and Eddie's last dance."
   };
 
+  const goToBooking = (movieId) => {
+    navigate(`/booking/${movieId}`);
+  };
   
   const showtimes = [
     { id: 1, time: '12:30 PM', theater: 'Studio 1' },
@@ -156,7 +161,7 @@ const Detailpage = () => {
                 backgroundColor: '#CBAE81',
                 color: 'white'
               }
-              }}>Booking Now</Button>
+              }} onClick={() => goToBooking(1)}>Booking Now</Button>
         </Col>
       </Row>
     </Container>

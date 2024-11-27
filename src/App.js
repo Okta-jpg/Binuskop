@@ -8,6 +8,7 @@ import Login from './components/pages/Login';
 import Register from './components/pages/Register';
 import Detailpage from './components/pages/Detailpage';
 import History from './components/pages/History';
+import Bookingpage from './components/pages/Bookingpage';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path='/detail' element={<Detailpage/>}/>
+          <Route path="/booking/:id" element={<Bookingpage />} />
           <Route path='/history' element={<History/>}/>
         </Routes>
       </main>
