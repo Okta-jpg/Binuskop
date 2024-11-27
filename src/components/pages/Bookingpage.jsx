@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 
 const Bookingpage = () => {
   const { id } = useParams();
-  
+
   const movies = [
     {
       id: 1,
@@ -49,8 +49,8 @@ const Bookingpage = () => {
   const totalPrice = selectedSeats.length * ticketPrice;
 
   return (
-    <div style={{minHeight: '100vh', display: 'flex', alignItems: 'center'}}>
-      <Container className="p-4 ">
+    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', paddingTop: '100px', paddingBottom: '20px' }}>
+      <Container className="p-4">
         <div
           style={{
             border: '1px solid #CBAE81',
@@ -61,87 +61,154 @@ const Bookingpage = () => {
           }}
         >
           <Row>
-            <Col md={4} className="text-center">
-              <img
-                src={movie.posterUrl}
-                alt={movie.title}
+            <Col
+                md={4}
+                className="d-flex flex-column align-items-center justify-content-center text-center"
                 style={{
-                  width: '100%',
-                  maxWidth: '200px',
-                  height: 'auto',
-                  borderRadius: '8px',
-                  marginBottom: '10px',
+                    height: '100%', 
+                    textAlign: 'center', 
                 }}
-                onError={(e) => {
-                  e.target.src = 'https://via.placeholder.com/300x400?text=Image+Not+Available';
-                }}
-              />
-              <h5 style={{ fontWeight: 'bold', color: '#ffffff' }}>{movie.title}</h5>
+                >
+                <img
+                    src={movie.posterUrl}
+                    alt={movie.title}
+                    style={{
+                    marginLeft: '150px',
+                    marginTop: '12px',
+                    width: '100%',
+                    maxWidth: '300px', 
+                    height: 'auto',
+                    borderRadius: '8px',
+                    marginBottom: '15px',
+                    }}
+                    onError={(e) => {
+                    e.target.src = 'https://via.placeholder.com/300x400?text=Image+Not+Available';
+                    }}
+                />
+                <h5
+                    style={{
+                    marginLeft: '150px',
+                    fontWeight: 'bold',
+                    color: '#ffffff',
+                    textAlign: 'center', 
+                    }}
+                >
+                    {movie.title}
+                </h5>
             </Col>
             <Col md={8}>
-              <h5
+            <div
                 style={{
-                  fontWeight: 'bold',
-                  textAlign: 'center',
-                  borderBottom: '1px solid #CBAE81',
-                  paddingBottom: '10px',
-                  marginBottom: '20px',
+                marginTop: '80px',
+                border: '1px solid #CBAE81', 
+                borderRadius: '10px', 
+                padding: '20px', 
+                backgroundColor: '#1c1c1c', 
+                width: '70%', 
+                margin: '0 auto', 
                 }}
-              >
-                Detail Pemesanan
-              </h5>
-              <div className="mb-3">
-                <h6 style={{ textAlign: 'left', fontWeight: 'normal', color: '#CBAE81' }}>
-                  Pilih Jam Tayang:
-                </h6>
-                <div className="d-flex flex-wrap gap-2">
-                  {movie.showtimes.map((time, index) => (
-                    <Button
-                      key={index}
-                      style={{
-                        backgroundColor: selectedShowtime === time ? '#CBAE81' : '#333',
-                        color: selectedShowtime === time ? '#000' : '#fff',
-                        border: '1px solid #CBAE81',
-                        width: '60px',
-                        height: '30px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                      }}
-                      onClick={() => handleShowtimeClick(time)}
+            >
+                <h5
+                style={{
+                    marginTop: '10px',
+                    fontWeight: 'bold',
+                    textAlign: 'center',
+                    borderBottom: '1px solid #CBAE81',
+                    paddingBottom: '10px',
+                    marginBottom: '20px',
+                    color: '#CBAE81',
+                    display: 'inline-block',
+                    width: '50%', 
+                }}
+                >
+                Order Details
+                </h5>
+                <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center', 
+                }}
+                >
+                <div className="mb-3">
+                    <h6
+                    style={{
+                        textAlign: 'center',
+                        fontWeight: 'normal',
+                        color: '#CBAE81',
+                        marginBottom: '10px',
+                    }}
                     >
-                      {time}
-                    </Button>
-                  ))}
+                    Select Showtime
+                    </h6>
+                    <div className="d-flex flex-wrap gap-3 justify-content-center">
+                    {movie.showtimes.map((time, index) => (
+                        <Button
+                        key={index}
+                        style={{
+                            backgroundColor: selectedShowtime === time ? '#CBAE81' : '#333',
+                            color: selectedShowtime === time ? '#000' : '#fff',
+                            border: '1px solid #CBAE81',
+                            width: '90px',
+                            height: '40px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            whiteSpace: 'nowrap',
+                        }}
+                        onClick={() => handleShowtimeClick(time)}
+                        >
+                        {time}
+                        </Button>
+                    ))}
+                    </div>
                 </div>
-              </div>
-              <div style={{ textAlign: 'left', marginBottom: '15px' }}>
-                <Form.Label style={{ fontWeight: 'normal', color: '#CBAE81' }}>Jumlah Tiket</Form.Label>
-                <Form.Control
-                  type="number"
-                  min="1"
-                  max="10"
-                  value={quantity}
-                  onChange={(e) => {
-                    setQuantity(parseInt(e.target.value) || 1);
-                    setSelectedSeats([]);
-                  }}
-                  required
-                  style={{
-                    backgroundColor: '#333',
-                    color: '#fff',
-                    border: '1px solid #666',
-                    width: '100%',
-                  }}
-                />
-              </div>
-              <p style={{ textAlign: 'left', fontWeight: 'normal', color: '#CBAE81', margin: '10px 0' }}>
-                Tickets Selected: {selectedSeats.length}/{quantity}
-              </p>
-              <p style={{ textAlign: 'left', fontWeight: 'normal', color: '#CBAE81', marginBottom: '10px' }}>
-                Total Amount: Rp {totalPrice.toLocaleString()}
-              </p>
-            </Col>
+                <div style={{ textAlign: 'center', marginBottom: '15px' }}>
+                    <Form.Label style={{ fontWeight: 'normal', color: '#CBAE81' }}>
+                    Number of Tickets
+                    </Form.Label>
+                    <Form.Control
+                    type="number"
+                    min="1"
+                    max="10"
+                    value={quantity}
+                    onChange={(e) => {
+                        setQuantity(parseInt(e.target.value) || 1);
+                        setSelectedSeats([]);
+                    }}
+                    required
+                    style={{
+                        backgroundColor: '#333',
+                        color: '#fff',
+                        border: '1px solid #666',
+                        width: '130px',
+                        margin: '0 auto', 
+                    }}
+                    />
+                </div>
+                <p
+                    style={{
+                    textAlign: 'center',
+                    fontWeight: 'normal',
+                    color: '#CBAE81',
+                    margin: '10px 0',
+                    }}
+                >
+                    Tickets Selected: {selectedSeats.length}/{quantity}
+                </p>
+                <p
+                    style={{
+                    textAlign: 'center',
+                    fontWeight: 'normal',
+                    color: '#CBAE81',
+                    marginBottom: '10px',
+                    }}
+                >
+                    Total Amount: Rp {totalPrice.toLocaleString()}
+                </p>
+                </div>
+            </div>
+          </Col>
           </Row>
         </div>
         <div
@@ -150,6 +217,7 @@ const Bookingpage = () => {
             borderRadius: '10px',
             backgroundColor: '#1c1c1c',
             padding: '20px',
+            marginTop: '60px'
           }}
         >
           <h5
@@ -159,13 +227,14 @@ const Bookingpage = () => {
               textAlign: 'center',
               borderBottom: '1px solid #CBAE81',
               paddingBottom: '5px',
+              color: '#CBAE81', 
             }}
           >
-            Pilih Kursi Anda
+           Choose Your Seat
           </h5>
           <div
             style={{
-              backgroundColor: '#333',
+              backgroundColor: '#333', 
               padding: '10px',
               marginBottom: '15px',
               textAlign: 'center',
@@ -173,7 +242,15 @@ const Bookingpage = () => {
               borderRadius: '8px',
             }}
           >
-            SCREEN
+            <span
+              style={{
+                color: '#CBAE81', 
+                fontSize: '16px',
+                fontWeight: 'bold',
+              }}
+            >
+              SCREEN
+            </span>
           </div>
           <div
             style={{
@@ -183,7 +260,7 @@ const Bookingpage = () => {
             }}
           >
             {rows.map((row) => (
-              <Row key={row} className="justify-content-center mb-1">
+              <Row key={row} className="justify-content-center mb-2">
                 {[...Array(seatsPerRow).keys()].map((seatIndex) => {
                   const seat = `${row}${seatIndex + 1}`;
                   const isSelected = selectedSeats.includes(seat);
@@ -195,7 +272,7 @@ const Bookingpage = () => {
                       key={seat}
                       xs="auto"
                       style={{
-                        padding: '2px',
+                        padding: '5px',
                       }}
                     >
                       <Button
@@ -206,11 +283,11 @@ const Bookingpage = () => {
                             ? '#555'
                             : '#444',
                           color: isSelected ? '#000' : '#fff',
-                          width: '25px',
-                          height: '25px',
-                          borderRadius: '4px',
+                          width: '40px',
+                          height: '40px',
+                          borderRadius: '6px',
                           border: '1px solid #666',
-                          fontSize: '10px',
+                          fontSize: '12px',
                           fontWeight: 'bold',
                           display: 'flex',
                           alignItems: 'center',
