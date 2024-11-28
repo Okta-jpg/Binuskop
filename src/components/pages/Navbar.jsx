@@ -8,7 +8,7 @@ const MovieNavbar = () => {
   return (
     <Navbar expand="lg" style={{ backgroundColor: '#282c34' , height: '80px'}} fixed="top">
       <Container>
-        <Navbar.Brand href="#" style={{ color: '#CBAE81', fontSize : '24px', fontWeight : 'bold', paddingRight : "3" }}>BINUSKOP</Navbar.Brand>
+        <Navbar.Brand href="/" style={{ color: '#CBAE81', fontSize : '24px', fontWeight : 'bold', paddingRight : "3" }}>BINUSKOP</Navbar.Brand>
         <Navbar.Toggle
           aria-controls="navbar-nav"
           style={{ backgroundColor: '#CBAE81', borderColor: '#CBAE81' , }} 
