@@ -16,7 +16,7 @@ const MovieNavbar = () => {
         <Navbar.Collapse id="navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="/" style={{ color: '#CBAE81',fontSize : '18px' }}>Home</Nav.Link>
-            <Nav.Link href="/history" style={{ color: '#CBAE81' ,fontSize : '18px'}}>History</Nav.Link>
+            <Nav.Link href="/history" style={{ color: '#CBAE81' ,fontSize : '18px'}}>My Ticket</Nav.Link>
           </Nav>
 
           <Dropdown
