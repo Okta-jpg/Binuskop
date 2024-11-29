@@ -46,6 +46,7 @@ const Login = () => {
       } else {
         console.log("Login Success: ",dataJson.access_token);
         localStorage.setItem("access_token", dataJson.access_token);
+        navigate("/")
       }
     } catch (err) {
       console.log(err);
@@ -94,7 +95,7 @@ const Login = () => {
                     style={{ 
                       backgroundColor: '#CBAE81',
                       borderColor: '#CBAE81'
-                    }} className="mb-3"> Sign In</Button>
+                    }} className="mb-3" > Sign In</Button>
                 </div>
 
      

@@ -227,7 +227,7 @@ const Detailpage = () => {
                   color: "white",
                 },
               }}
-              onClick={() => goToBooking(1)}
+              onClick={() => goToBooking(movie.id)}
             >
               Booking Now
             </Button>

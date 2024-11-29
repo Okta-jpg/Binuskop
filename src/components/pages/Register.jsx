@@ -42,6 +42,7 @@ const Register = () => {
             console.log("Register Failed: ", dataJson.error);
           } else {
             console.log("Register Success: ", dataJson.message);
+            navigate("/login")
           }
         } catch (err) {
           console.log(err);

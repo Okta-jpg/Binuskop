@@ -1,24 +1,39 @@
 import { Container, Row, Col, Modal, Table } from 'react-bootstrap';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const History = () => {
+    const [tickets, setTickets] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [showModal, setShowModal] = useState(false);
+    const [selectedTicket, setSelectedTicket] = useState(null);
 
-    const tickets = [
-        { id:1, title:"HELLO MAMAMIA LEZATO", start_time:"10:00", end_time:"12:00", quantity:2, price:10000, seats:"23, 46", payment:"Cash", image_link: 'https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?q=80&w=2952&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', duration:128, genre:"Crime, Action, Drama, Thrill, Mamamia"},
-        { id:1, title:"HELLO", start_time:"10:00", end_time:"12:00", quantity:2, price:10000, seats:"23, 46", payment:"Cash", image_link: 'https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?q=80&w=2952&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', duration:128, genre:"Crime, Action, Drama"},
-        { id:1, title:"HELLO", start_time:"10:00", end_time:"12:00", quantity:2, price:10000, seats:"23, 46", payment:"Cash", image_link: 'https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?q=80&w=2952&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', duration:128, genre:"Crime, Action, Drama"},
-        { id:1, title:"HELLO", start_time:"10:00", end_time:"12:00", quantity:2, price:10000, seats:"23, 46", payment:"Cash", image_link: 'https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?q=80&w=2952&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', duration:128, genre:"Crime, Action, Drama"},
-        { id:1, title:"HELLO", start_time:"10:00", end_time:"12:00", quantity:2, price:10000, seats:"23, 46", payment:"Cash", image_link: 'https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?q=80&w=2952&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', duration:128, genre:"Crime, Action, Drama"},
-        { id:1, title:"HELLO", start_time:"10:00", end_time:"12:00", quantity:2, price:10000, seats:"23, 46", payment:"Cash", image_link: 'https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?q=80&w=2952&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', duration:128, genre:"Crime, Action, Drama"},
-        { id:1, title:"HELLO", start_time:"10:00", end_time:"12:00", quantity:2, price:10000, seats:"23, 46", payment:"Cash", image_link: 'https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?q=80&w=2952&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', duration:128, genre:"Crime, Action, Drama"},
-        { id:1, title:"HELLO", start_time:"10:00", end_time:"12:00", quantity:2, price:10000, seats:"23, 46", payment:"Cash", image_link: 'https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?q=80&w=2952&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', duration:128, genre:"Crime, Action, Drama"},
-        { id:1, title:"HELLO", start_time:"10:00", end_time:"12:00", quantity:2, price:10000, seats:"23, 46", payment:"Cash", image_link: 'https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?q=80&w=2952&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', duration:128, genre:"Crime, Action, Drama"},
-        { id:1, title:"HELLO", start_time:"10:00", end_time:"12:00", quantity:2, price:10000, seats:"23, 46", payment:"Cash", image_link: 'https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?q=80&w=2952&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', duration:128, genre:"Crime, Action, Drama"},
-        { id:1, title:"HELLO", start_time:"10:00", end_time:"12:00", quantity:2, price:10000, seats:"23, 46", payment:"Cash", image_link: 'https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?q=80&w=2952&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', duration:128, genre:"Crime, Action, Drama"}
-    ]
+    useEffect(() => {
+        const fetchTickets = async () => {
+            try {
+                const response = await fetch('http://localhost:3000/tickets', {
+                    method: 'GET',
+                    headers: {
+                      'Content-Type': 'application/json', 
+                      'access_token': localStorage.getItem("access_token") 
+                    },
+                  });
 
-    const [showModal, setShowModal] = useState(false)
-    const [selectedTicket, setSelectedTicket] = useState(null)
+                if (!response.ok) {
+                    throw new Error('Failed to fetch tickets');
+                }
+                const result = await response.json();
+                console.log("🚀 ~ fetchTickets ~ result:", result.data)
+                setTickets(result.data);
+                setIsLoading(false);
+            } catch (err) {
+                setError(err.message);
+                setIsLoading(false);
+            }
+        };
+
+        fetchTickets();
+    }, []);
 
     const openModal = (ticket) => {
         setSelectedTicket(ticket)
@@ -70,12 +85,12 @@ const History = () => {
                             onClick={() => openModal(ticket)}
                             onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(203, 174, 129, 0.2)'} 
                             onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(203, 174, 129, 0.1)'}>
-                                <Col className="p-0" xs={4}><p className="text-start" style={{ ...noWrap }} >{ticket.title}</p></Col>
-                                <Col className="p-0" xs={1}><p>{ticket.start_time}</p></Col>
-                                <Col className="p-0" xs={1}><p>{ticket.end_time}</p></Col>
-                                <Col className="p-0 d-none d-md-block" xs={1}><p>{ticket.quantity}</p></Col>
-                                <Col className="p-0 d-none d-md-block" xs={2}><p style={{ ...noWrap }} >{ticket.seats}</p></Col>
-                                <Col className="p-0" xs={2}><p style={{ ...noWrap }} >{ticket.payment}</p></Col>
+                                <Col className="p-0" xs={4}><p className="text-start" style={{ ...noWrap }} >{ticket.Showtime.Movie.title}</p></Col>
+                                <Col className="p-0" xs={1}><p>{ticket.Showtime.start_time}</p></Col>
+                                <Col className="p-0" xs={1}><p>{ticket.Showtime.end_time}</p></Col>
+                                <Col className="p-0 d-none d-md-block" xs={1}><p>{ticket.Transaction.quantity}</p></Col>
+                                <Col className="p-0 d-none d-md-block" xs={2}><p style={{ ...noWrap }} >{ticket.seat_number}</p></Col>
+                                <Col className="p-0" xs={2}><p style={{ ...noWrap }} >{ticket.Transaction.payment_method}</p></Col>
                             </Row>
                         )
                     })}
@@ -91,7 +106,7 @@ const History = () => {
                     </Modal.Header>
                     <Modal.Body className="d-flex m-0 p-1 p-2 w-100 h-100" style={{ backgroundColor: 'rgba(203, 174, 129, 0.5)' }}>
                         <Container fluid className="d-flex flex-row w-100 h-100 m-0 p-0" style={{ gap:'10px' }}>
-                            <img src={selectedTicket.image_link} alt="Not Found!" className="w-50 h-100" style={{ objectFit:'cover', objectPosition:'center' }}/>
+                            <img src={selectedTicket.Showtime.Movie.image_link} alt="Not Found!" className="w-50 h-100" style={{ objectFit:'cover', objectPosition:'center' }}/>
                             <Table bordered={false} striped={false} className="w-50 h-100">
                                 <tbody>
                                 <tr>
@@ -100,35 +115,35 @@ const History = () => {
                                 </tr>
                                 <tr>
                                     <td className="m-0 p-1"><strong>Title</strong></td>
-                                    <td className="m-0 p-1">{selectedTicket.title}</td>
+                                    <td className="m-0 p-1">{selectedTicket.Showtime.Movie.title}</td>
                                 </tr>
                                 <tr>
                                     <td className="m-0 p-1"><strong>Genre</strong></td>
-                                    <td className="m-0 p-1">{selectedTicket.genre}</td>
+                                    <td className="m-0 p-1">{selectedTicket.Showtime.Movie.genre}</td>
                                 </tr>
                                 <tr>
                                     <td className="m-0 p-1"><strong>Time</strong></td>
-                                    <td className="m-0 p-1">{selectedTicket.start_time} - {selectedTicket.end_time}</td>
+                                    <td className="m-0 p-1">{selectedTicket.Showtime.start_time}</td>
                                 </tr>
                                 <tr>
                                     <td className="m-0 p-1"><strong>Duration</strong></td>
-                                    <td className="m-0 p-1">{selectedTicket.duration} minutes</td>
+                                    <td className="m-0 p-1">{selectedTicket.Showtime.Movie.duration} minutes</td>
                                 </tr>
                                 <tr>
                                     <td className="m-0 p-1"><strong>Quantity</strong></td>
-                                    <td className="m-0 p-1">{selectedTicket.quantity} seat(s)</td>
+                                    <td className="m-0 p-1">{selectedTicket.Transaction.quantity} seat(s)</td>
                                 </tr>
                                 <tr>
                                     <td className="m-0 p-1"><strong>Seats</strong></td>
-                                    <td className="m-0 p-1">{selectedTicket.seats}</td>
+                                    <td className="m-0 p-1">{selectedTicket.seat_number}</td>
                                 </tr>
                                 <tr>
                                     <td className="m-0 p-1"><strong>Price</strong></td>
-                                    <td className="m-0 p-1">Rp.{selectedTicket.price}</td>
+                                    <td className="m-0 p-1">Rp.{selectedTicket.Transaction.total_amount}</td>
                                 </tr>
                                 <tr>
                                     <td className="m-0 p-1"><strong>Payment</strong></td>
-                                    <td className="m-0 p-1">{selectedTicket.payment}</td>
+                                    <td className="m-0 p-1">{selectedTicket.Transaction.payment_method}</td>
                                 </tr>
                                 </tbody>
                             </Table>
