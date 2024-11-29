@@ -52,7 +52,6 @@ const Bookingpage = () => {
   };
 
   const handleShowtimeClick = (time) => {
-    console.log("🚀 ~ handleShowtimeClick ~ time:", time)
     setSelectedShowtime(time);
   };
 
@@ -62,14 +61,12 @@ const Bookingpage = () => {
     event.preventDefault();
     
     const bookingData = {
-      start_time: selectedShowtime,  // Pass selected showtime here
-      seat_number: selectedSeats.join(","),    // Pass selected seats here
+      start_time: selectedShowtime,  
+      seat_number: selectedSeats.join(","),  
       quantity,
       totalPrice,
     };
     
-    console.log("🚀 ~ handleBookingSubmit ~ bookingData.selectedSeats:", bookingData.seat_number);
-    console.log("🚀 ~ handleBookingSubmit ~ bookingData.selectedShowtime:", bookingData.start_time);
 
     try {
       const response = await fetch(`http://localhost:3000/tickets/${id}`, {
@@ -82,13 +79,12 @@ const Bookingpage = () => {
       });
 
       const result = await response.json();
-      console.log("🚀 ~ handleBookingSubmit ~ result:", result)
 
       if (response.ok) {
         alert("Booking successful!");
         navigate("/history")
       } else {
-        alert("Booking failed. Please try again.");
+        alert("Booking failed. You need to login first.");
       }
     } catch (error) {
       alert("Error submitting booking. Please try again.");

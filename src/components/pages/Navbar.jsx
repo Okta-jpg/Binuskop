@@ -6,12 +6,13 @@ import { useNavigate } from "react-router-dom";
 const MovieNavbar = () => {
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const userName = localStorage.getItem("name");
+  const isLoggedIn = localStorage.getItem("access_token");
 
   const doLogout = () => {
     localStorage.clear();
     navigate("/login");
   };
-  const isLoggedIn = localStorage.getItem("access_token") !== null;
 
   return (
     <Navbar
@@ -40,7 +41,14 @@ const MovieNavbar = () => {
             <Nav.Link href="/" style={{ color: "#CBAE81", fontSize: "18px" }}>
               Home
             </Nav.Link>
-            {isLoggedIn && <Nav.Link href="/history" style={{ color: '#CBAE81', fontSize: '18px' }}>MyTicket</Nav.Link>}
+            {isLoggedIn && (
+              <Nav.Link
+                href="/history"
+                style={{ color: "#CBAE81", fontSize: "18px" }}
+              >
+                MyTicket
+              </Nav.Link>
+            )}
           </Nav>
 
           <Dropdown
@@ -62,7 +70,9 @@ const MovieNavbar = () => {
                 roundedCircle
                 style={{ width: "40px", height: "40px", marginRight: "10px" }}
               />
-              <span style={{ color: "#CBAE81" }}>User</span>
+              <span style={{ color: "#CBAE81" }}>
+                {userName ? userName : "Guest"}
+              </span>
               {isDropdownOpen ? (
                 <ChevronUp size={20} />
               ) : (
@@ -74,8 +84,11 @@ const MovieNavbar = () => {
               align="end"
               style={{ backgroundColor: "#CBAE81", borderRadius: "8px" }}
             >
-              <Dropdown.Item href="/register">Sign Up</Dropdown.Item>
-              <Dropdown.Item onClick={doLogout}>Keluar</Dropdown.Item>
+              {!isLoggedIn ? (
+                <Dropdown.Item href="/register">Sign Up</Dropdown.Item>
+              ) : (
+                <Dropdown.Item onClick={doLogout}>Keluar</Dropdown.Item>
+              )}
             </Dropdown.Menu>
           </Dropdown>
         </Navbar.Collapse>

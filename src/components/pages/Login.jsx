@@ -41,11 +41,12 @@ const Login = () => {
       });
 
       const dataJson = await response.json();
+      console.log("🚀 ~ handleSubmit ~ dataJson:", dataJson)
       if (dataJson.error) {
         console.log("Login Failed: ", dataJson.error);
       } else {
-        console.log("Login Success: ",dataJson.access_token);
         localStorage.setItem("access_token", dataJson.access_token);
+        localStorage.setItem("name", dataJson.name);
         navigate("/")
       }
     } catch (err) {
