@@ -56,11 +56,11 @@ const Detailpage = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>; // Show a loading message while the data is being fetched
+    return <div>Loading...</div>; 
   }
 
   if (!movie) {
-    return <div>Movie not found</div>; // Show an error if no movie data is found
+    return <div>Movie not found</div>; 
   }
 
   return (
